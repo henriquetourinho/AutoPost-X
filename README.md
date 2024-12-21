@@ -1,6 +1,10 @@
-# AutoPost-X: Bot para Publicação Automática no X (Antigo Twitter)
+# AutoPost-X: Bot para Pblicação Automática no X (Antigo Twitter)
 
-Este script em Shell permite automatizar a publicação do último post de um usuário específico no **X (antigo Twitter)**. Ele utiliza a API oficial do X, com suporte ao novo domínio `https://api.x.com`.
+O AutoPost-X é um script em Shell projetado para automatizar a publicação de links das postagens mais recentes de um usuário específico no X (antigo Twitter).
+
+Ele utiliza a API oficial do X para buscar a última publicação feita por um usuário e, em seguida, publica automaticamente o link dessa postagem na sua conta autenticada no X. A publicação ocorre diretamente na conta do usuário que configurou o bot, oferecendo uma forma prática de compartilhar atualizações em tempo real sem a necessidade de interação manual.
+
+Esse bot é perfeito para quem deseja compartilhar automaticamente os links das publicações mais recentes do X, garantindo que a audiência se mantenha informada sobre os novos conteúdos.
 
 ---
 
@@ -38,8 +42,8 @@ Este script em Shell permite automatizar a publicação do último post de um us
 
 1. **Clone o Repositório:**
    ```bash
-   git clone https://github.com/<seu-usuario>/<seu-repositorio>.git
-   cd <seu-repositorio>
+   git clone https://github.com/henriquetourinho/AutoPost-X.git
+   cd AutoPost-X
    ```
 
 2. **Configuração das Credenciais:**
@@ -49,7 +53,7 @@ Este script em Shell permite automatizar a publicação do último post de um us
      API_SECRET_KEY="SEU_API_SECRET_KEY"
      ACCESS_TOKEN="SEU_ACCESS_TOKEN"
      ACCESS_TOKEN_SECRET="SEU_ACCESS_TOKEN_SECRET"
-     USER_HANDLE="usuario_alvo"
+     USER_HANDLE="henriquetourinho"
      ```
 
 3. **Permissão de Execução:**
@@ -70,7 +74,7 @@ Este script em Shell permite automatizar a publicação do último post de um us
 
 2. **Fluxo de Execução:**
    - O script autentica com a API do X.
-   - Recupera o último post do usuário especificado (`@usuario_alvo`).
+   - Recupera o último post do usuário especificado (`@henriquetourinho`).
    - Publica o conteúdo recuperado na conta autenticada.
 
 ---
@@ -112,6 +116,6 @@ Este projeto está licenciado sob a [MIT License](LICENSE).
 
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests com melhorias ou correções.
 
---- 
+---
 
-Se precisar de ajustes ou se algo não ficou claro, posso melhorar! 😊
+Caso precise de ajustes ou mais detalhes, estou à disposição! 😊
