@@ -1,4 +1,4 @@
-# AutoPost-X: Bot para Pblicação Automática no X (Antigo Twitter)
+# AutoPost-X: Bot para Publicação Automática no X (Antigo Twitter)
 
 O AutoPost-X é um script em Shell projetado para automatizar a publicação de links das postagens mais recentes de um usuário específico no X (antigo Twitter).
 
