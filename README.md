@@ -15,6 +15,14 @@ O **AutoPost-X** é um bot open source multifuncional para automação de postag
 
 ---
 
+## 🎬 Funcionamento do Bot
+
+Veja abaixo uma demonstração visual do funcionamento do AutoPost-X:
+
+![Funcionamento do Bot](https://github.com/henriquetourinho/AutoPost-X/blob/main/media/funcionamento.gif?raw=true)
+
+---
+
 ## 🆚 Comparativo: Versão Bash/Shell x Versão Python
 
 | Recurso                              | `autopost_x.sh` (Shell) | `autopost_x.py` (Python)        |
