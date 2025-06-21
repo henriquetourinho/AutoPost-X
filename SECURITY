@@ -1,0 +1,49 @@
+# 🔒 Política de Segurança — AutoPost-X
+
+Obrigado por se preocupar com a segurança do **AutoPost-X**!
+
+## 📢 Relatando Vulnerabilidades
+
+Se você encontrar alguma vulnerabilidade de segurança neste projeto, siga estes passos:
+
+1. **Não abra uma issue pública.**
+2. Envie um e-mail diretamente e de forma privada para o mantenedor:
+   - **henriquetourinho@gmail.com**
+3. No e-mail, forneça:
+   - Descrição detalhada da vulnerabilidade
+   - Como reproduzir o problema (passo a passo, se possível)
+   - Impacto potencial
+   - Sugestão de correção (opcional)
+
+O mantenedor se compromete a responder em até **5 dias úteis** e a tratar o problema com a máxima prioridade.
+
+---
+
+## 🧑‍💻 Boas Práticas de Segurança para Usuários
+
+- **Nunca compartilhe suas chaves/tokens da API do X/Twitter publicamente.**
+- Prefira usar variáveis de ambiente ou arquivos de configuração protegidos para armazenar tokens e senhas.
+- Sempre mantenha o seu sistema operacional e dependências Python (`tweepy`, `feedparser`, `Pillow`, etc.) atualizados.
+- Revise e restrinja permissões de aplicativos criados em [developer.x.com](https://developer.x.com/).
+- Não execute scripts baixados de fontes não confiáveis.
+
+---
+
+## 🔐 Política de Divulgação Responsável
+
+Ao receber um relatório de vulnerabilidade:
+- Corrigiremos o problema o mais rápido possível.
+- O responsável pela descoberta poderá ser creditado (se desejar).
+- Divulgaremos a correção e detalhes somente após a atualização estar disponível.
+
+---
+
+## 🛡️ Contato
+
+Dúvidas de segurança?  
+**E-mail:** henriquetourinho@gmail.com  
+**GitHub:** [@henriquetourinho](https://github.com/henriquetourinho)
+
+---
+
+Sua colaboração é essencial para manter o AutoPost-X seguro para todos!

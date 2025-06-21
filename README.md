@@ -1,121 +1,147 @@
-# AutoPost-X: Bot para Publicação Automática no X (Antigo Twitter)
+# 🤖 AutoPost-X — Automação Avançada para X (antigo Twitter)
 
-O AutoPost-X é um script em Shell projetado para automatizar a publicação de links das postagens mais recentes de um usuário específico no X (antigo Twitter).
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/) [![Shell](https://img.shields.io/badge/Shell-Bash-green.svg)](https://www.gnu.org/software/bash/) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 
-Ele utiliza a API oficial do X para buscar a última publicação feita por um usuário e, em seguida, publica automaticamente o link dessa postagem na sua conta autenticada no X. A publicação ocorre diretamente na conta do usuário que configurou o bot, oferecendo uma forma prática de compartilhar atualizações em tempo real sem a necessidade de interação manual.
-
-Esse bot é perfeito para quem deseja compartilhar automaticamente os links das publicações mais recentes do X, garantindo que a audiência se mantenha informada sobre os novos conteúdos.
+**Automatize postagens, monitore perfis, feeds RSS, publique imagens e muito mais no X (antigo Twitter) — agora com setup interativo, filtros inteligentes e logs detalhados!**
 
 ---
 
-## Funcionalidades
+## 📖 Visão Geral
 
-- **Autenticação OAuth 2.0:** Gerencia o processo de autenticação para acessar a API.
-- **Busca de Publicações:** Obtém o último post de um usuário específico.
-- **Publicação Automática:** Publica a postagem recuperada no X utilizando a conta autenticada.
+O **AutoPost-X** é um bot open source multifuncional para automação de postagens no X (antigo Twitter). O projeto evoluiu para atender diferentes públicos:
 
----
-
-## Pré-requisitos
-
-1. **Credenciais da API do X:**
-   - Crie um aplicativo no [Portal de Desenvolvedores do X](https://developer.twitter.com/en/apps) e obtenha:
-     - `API_KEY`
-     - `API_SECRET_KEY`
-     - `ACCESS_TOKEN`
-     - `ACCESS_TOKEN_SECRET`
-
-2. **Dependências:**
-   - **`curl`**: Utilizado para requisições HTTP.
-   - **`jq`**: Necessário para manipulação de dados JSON.
-   - Para instalar no Ubuntu/Debian:
-     ```bash
-     sudo apt update && sudo apt install curl jq -y
-     ```
-
-3. **Sistema Operacional:**
-   - Compatível com Linux/macOS. No Windows, utilize WSL (Windows Subsystem for Linux).
+- **Versão Clássica:** Shell Script (`autopost_x.sh`) — simples, direta, para quem quer automatizar apenas o repost do último tweet de um usuário.
+- **Versão Atual (Python):** Script Python avançado (`autopost_x.py`) — altamente configurável, suporta múltiplas fontes, modos de ação, filtros, geração de imagens, memória persistente e logs coloridos.
 
 ---
 
-## Configuração
+## 🆚 Comparativo: Versão Bash/Shell x Versão Python
 
-1. **Clone o Repositório:**
-   ```bash
-   git clone https://github.com/henriquetourinho/AutoPost-X.git
-   cd AutoPost-X
-   ```
-
-2. **Configuração das Credenciais:**
-   - Abra o arquivo `autopost_x.sh` e insira as credenciais da API:
-     ```bash
-     API_KEY="SUA_API_KEY"
-     API_SECRET_KEY="SEU_API_SECRET_KEY"
-     ACCESS_TOKEN="SEU_ACCESS_TOKEN"
-     ACCESS_TOKEN_SECRET="SEU_ACCESS_TOKEN_SECRET"
-     USER_HANDLE="henriquetourinho"
-     ```
-
-3. **Permissão de Execução:**
-   - Garanta que o script tenha permissão para execução:
-     ```bash
-     chmod +x autopost_x.sh
-     ```
+| Recurso                              | `autopost_x.sh` (Shell) | `autopost_x.py` (Python)        |
+|---------------------------------------|:-----------------------:|:-------------------------------:|
+| Autenticação OAuth 2.0                | ✔️                      | ✔️                              |
+| Busca e repost automático             | ✔️ (último tweet)       | ✔️ (vários modos e fontes)      |
+| Setup interativo                      | ❌                      | ✔️                              |
+| Monitoramento de múltiplos perfis     | ❌ (apenas 1 por vez)   | ✔️ (quantos quiser)             |
+| Suporte a RSS                         | ❌                      | ✔️                              |
+| Filtros por palavras-chave            | ❌                      | ✔️ (inclusão/exclusão)          |
+| Modos de ação (Tweet, Quote, Imagem…) | ❌                      | ✔️ (5 modos: tweet, quote, imagem, retweet, like) |
+| Geração de imagem                     | ❌                      | ✔️ (texto vira imagem com Pillow)|
+| Memória persistente de posts           | ❌                      | ✔️ (evita repetir)              |
+| Logs coloridos e detalhados           | ❌                      | ✔️ (terminal em português)      |
+| Fácil evolução                        | ❌                      | ✔️ (código modular e comentado) |
 
 ---
 
-## Uso
+## ⚡ Como Usar
 
-1. **Executar o Script:**
-   - Para iniciar o bot, execute:
-     ```bash
-     ./autopost_x.sh
-     ```
+### 1. Clone o repositório
 
-2. **Fluxo de Execução:**
-   - O script autentica com a API do X.
-   - Recupera o último post do usuário especificado (`@henriquetourinho`).
-   - Publica o conteúdo recuperado na conta autenticada.
+```bash
+git clone https://github.com/henriquetourinho/AutoPost-X.git
+cd AutoPost-X
+```
 
----
+### 2. Escolha sua versão
 
-## Personalização
+#### 🐚 Versão Bash/Shell (`autopost_x.sh`)
 
-- **Alterar o Usuário Alvo:**
-  - Modifique a variável `USER_HANDLE` no script para o nome de usuário desejado.
-
-- **Publicar um Conteúdo Diferente:**
-  - Edite a mensagem na chamada da função `post_to_x` para adicionar ou modificar o texto.
-
----
-
-## Dicas de Segurança
-
-- **Proteção de Credenciais:**
-  - Em vez de armazenar as credenciais no script, utilize variáveis de ambiente:
+- **Pré-requisitos:** `bash`, `curl`, `jq`
+- **Configure:** Edite suas credenciais no início do arquivo `autopost_x.sh`.
+- **Uso:**
     ```bash
-    export API_KEY="SUA_API_KEY"
-    export API_SECRET_KEY="SEU_API_SECRET_KEY"
-    export ACCESS_TOKEN="SEU_ACCESS_TOKEN"
-    export ACCESS_TOKEN_SECRET="SEU_ACCESS_TOKEN_SECRET"
+    chmod +x autopost_x.sh
+    ./autopost_x.sh
     ```
-  - No script, substitua as credenciais pelo uso das variáveis de ambiente:
+- **O que faz:**  
+    - Busca o último post de um usuário do X e publica esse conteúdo em sua própria conta.
+    - Simples, sem filtros, sem memória persistente.
+
+---
+
+#### 🐍 Versão Python (`autopost_x.py`)
+
+- **Pré-requisitos:**  
+    - Python 3.8 ou superior  
+    - Instale as dependências:
+        ```bash
+        pip install tweepy feedparser Pillow
+        ```
+- **Primeira execução:**  
     ```bash
-    API_KEY=${API_KEY}
+    python autopost_x.py
     ```
+    - Você será guiado por um setup interativo no terminal (não precisa editar arquivos).
+    - O arquivo `config.json` é gerado automaticamente para salvar suas preferências.
+- **Principais recursos:**  
+    - Monitora qualquer número de perfis do X **e** feeds RSS.
+    - Permite definir filtros por palavras-chave (inclusão/exclusão).
+    - Escolha o modo de ação: tweet, quote, imagem, retweet ou like.
+    - Gera imagens com o texto do post e publica automaticamente (modo imagem).
+    - Salva IDs de posts já processados para nunca repetir ação.
+    - Logs coloridos e detalhados em português, facilitando o acompanhamento e troubleshooting.
 
 ---
 
-## Licença
+## 📝 Exemplo de Configuração (Python)
 
-Este projeto está licenciado sob a [MIT License](LICENSE).
+Na primeira execução, o AutoPost-X vai perguntar:
+
+- Suas chaves e tokens da API do X/Twitter
+- Quais perfis e feeds RSS monitorar
+- Palavras-chave para filtrar conteúdo
+- Modo de ação padrão
+- Opções de fonte e cor para geração de imagem (se desejar)
+
+Tudo é salvo no `config.json`!
 
 ---
 
-## Contribuições
+## 📦 Estrutura do Projeto
 
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests com melhorias ou correções.
+```
+.
+├── autopost_x.sh      # Script Shell clássico (simples)
+├── autopost_x.py      # Script Python multifuncional (avançado)
+├── config.json        # Configuração interativa (Python, gerado pelo usuário)
+├── processed_ids.json # Posts já processados (Python, gerado automaticamente)
+├── LICENSE            # Licença GNU GPL v3
+└── README.md
+```
 
 ---
 
-Caso precise de ajustes ou mais detalhes, estou à disposição! 😊
+## 📝 Requisitos
+
+- **Python:** 3.8 ou superior
+- **Dependências Python:**  
+    ```bash
+    pip install tweepy feedparser Pillow
+    ```
+- **Chaves da API do X/Twitter:**  
+    Crie as suas em [developer.x.com](https://developer.x.com/)
+- **Para Shell Script:**  
+    - `bash`, `curl`, `jq`
+
+---
+
+## 📜 Licença
+
+Este projeto é distribuído sob a **Licença GNU GPL v3**. Veja o arquivo `LICENSE` para mais detalhes.
+
+---
+
+## 🙋‍♂️ Autor e Colaboração
+
+**Carlos Henrique Tourinho Santana**  
+📍 Salvador - Bahia  
+🔗 [Wiki Debian](https://wiki.debian.org/henriquetourinho)  
+🔗 [LinkedIn](https://br.linkedin.com/in/carloshenriquetourinhosantana)  
+🔗 [GitHub](https://github.com/henriquetourinho)
+
+**Colaboração:**  
+Código gerado, aprimorado e documentado pela IA do Google, sob direção do autor.
+
+---
+
+📢 **Projeto vivo: contribua, sugira melhorias ou abra uma issue!**

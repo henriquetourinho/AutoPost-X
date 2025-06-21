@@ -1,0 +1,3 @@
+tweepy
+feedparser
+Pillow
