@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AutoPost-X - Automatize seus posts com inteligência</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* CSS Reset e Variáveis */
+    :root {
+      --bg-dark: #121212;
+      --bg-card: #1e1e1e;
+      --primary: #00c6ff;
+      --secondary: #0072ff;
+      --text: #e0e0e0;
+      --text-light: #a0a0a0;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    
+    /* Header */
+    header {
+      background-color: rgba(30, 30, 30, 0.9);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    
+    .logo h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .tagline {
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+    
+    /* Container Principal */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 7rem 2rem 3rem;
+    }
+    
+    /* Seções */
+    section {
+      margin-bottom: 4rem;
+      scroll-margin-top: 6rem;
+    }
+    
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: 3px;
+    }
+    
+    /* Sobre o Projeto */
+    .about {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .about p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+    
+    .versions {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    
+    .version-card {
+      background-color: var(--bg-card);
+      padding: 1.5rem;
+      border-radius: 8px;
+      flex: 1;
+      border-left: 3px solid var(--primary);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .version-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .version-card h3 {
+      margin-bottom: 0.8rem;
+      color: var(--primary);
+    }
+    
+    /* Funcionalidades */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .feature-card {
+      background-color: var(--bg-card);
+      padding: 1.5rem;
+      border-radius: 8px;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .feature-icon {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-top: 0.3rem;
+    }
+    
+    .feature-content h3 {
+      margin-bottom: 0.5rem;
+    }
+    
+    .feature-content p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+    
+    /* Demonstração */
+    .demo {
+      background-color: var(--bg-card);
+      padding: 2rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+    
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 */
+      height: 0;
+      overflow: hidden;
+      margin-top: 1.5rem;
+      border-radius: 8px;
+    }
+    
+    .video-container video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    
+    /* Código */
+    .code {
+      background-color: var(--bg-card);
+      padding: 2rem;
+      border-radius: 8px;
+    }
+    
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 500;
+      transition: transform 0.2s ease;
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+    
+    .btn i {
+      margin-right: 0.5rem;
+    }
+    
+    pre {
+      background-color: #1a1a1a;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    
+    /* Rodapé */
+    footer {
+      background-color: var(--bg-card);
+      padding: 3rem 2rem;
+      text-align: center;
+      margin-top: 3rem;
+    }
+    
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .author {
+      margin-bottom: 1.5rem;
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .social-links a {
+      color: var(--text);
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      color: var(--primary);
+    }
+    
+    .support {
+      background-color: rgba(0, 198, 255, 0.1);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin: 2rem 0;
+      border-left: 4px solid var(--primary);
+    }
+    
+    .support p {
+      margin-bottom: 0.5rem;
+    }
+    
+    .donate-email {
+      font-weight: bold;
+      color: var(--primary);
+      word-break: break-all;
+    }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    
+    .footer-links a {
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+    
+    .license {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-top: 1.5rem;
+    }
+    
+    .made-with-love {
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+    }
+    
+    .made-with-love strong {
+      color: var(--primary);
+    }
+    
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .versions {
+        flex-direction: column;
+      }
+      
+      .container {
+        padding-top: 6rem;
+      }
+      
+      .section-title {
+        font-size: 1.7rem;
+      }
+      
+      .footer-links {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <h1>AutoPost-X</h1>
+    </div>
+    <div class="tagline">Automatize seus posts com inteligência</div>
+  </header>
+  
+  <div class="container">
+    <!-- Seção Sobre -->
+    <section id="about">
+      <h2 class="section-title">Sobre o Projeto</h2>
+      <div class="about">
+        <p>O AutoPost-X é um bot automatizador para a rede social X (antigo Twitter) que evoluiu de um simples script em Shell para uma aplicação mais inteligente em Python.</p>
+        <p>Ele monitora perfis e feeds RSS, identifica conteúdos relevantes com base em filtros configuráveis, e publica automaticamente com diversas opções de interação.</p>
+        
+        <div class="versions">
+          <div class="version-card">
+            <h3>Versão Shell Script (.sh)</h3>
+            <p>Implementação inicial com funcionalidades básicas de automação, ideal para sistemas Unix-like.</p>
+          </div>
+          <div class="version-card">
+            <h3>Versão Python (.py)</h3>
+            <p>Versão mais avançada com recursos adicionais, interface interativa e maior portabilidade entre sistemas.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Seção Funcionalidades -->
+    <section id="features">
+      <h2 class="section-title">Funcionalidades</h2>
+      <div class="features">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-cogs"></i></div>
+          <div class="feature-content">
+            <h3>Setup Interativo</h3>
+            <p>Configuração fácil através de interface passo-a-passo no terminal.</p>
+          </div>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-users"></i></div>
+          <div class="feature-content">
+            <h3>Multiperfis e RSS</h3>
+            <p>Monitora múltiplos perfis e feeds RSS simultaneamente.</p>
+          </div>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-retweet"></i></div>
+          <div class="feature-content">
+            <h3>Repost, Comentário, Like</h3>
+            <p>Diversas formas de interação com os posts encontrados.</p>
+          </div>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-image"></i></div>
+          <div class="feature-content">
+            <h3>Conversão para Imagem</h3>
+            <p>Transforma textos em imagens para melhor engajamento.</p>
+          </div>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-filter"></i></div>
+          <div class="feature-content">
+            <h3>Filtros e Exclusões</h3>
+            <p>Palavras-chave para incluir ou excluir conteúdos específicos.</p>
+          </div>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-brain"></i></div>
+          <div class="feature-content">
+            <h3>Memória Anti-repetição</h3>
+            <p>Registro de posts já processados para evitar duplicação.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Seção Demonstração -->
+    <section id="demo">
+      <h2 class="section-title">Demonstração</h2>
+      <div class="demo">
+        <p>Veja o AutoPost-X em ação:</p>
+        <div class="video-container">
+          <video controls>
+            <source src="https://github.com/henriquetourinho/AutoPost-X/blob/main/media/funcionamento.mp4" type="video/mp4">
+            Seu navegador não suporta o elemento de vídeo.
+          </video>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Seção Código -->
+    <section id="code">
+      <h2 class="section-title">Código-Fonte</h2>
+      <div class="code">
+        <div class="code-header">
+          <h3>Trecho de Exemplo</h3>
+          <a href="https://github.com/henriquetourinho/AutoPost-X" class="btn" target="_blank">
+            <i class="fab fa-github"></i> Ver no GitHub
+          </a>
+        </div>
+        <pre><code># Exemplo de configuração
+[settings]
+api_key = sua_chave_api
+profiles = perfil1, perfil2, perfil3
+rss_feeds = https://exemplo.com/feed
+post_mode = image
+interaction = like+retweet
+filter_keywords = tecnologia, python
+exclude_keywords = política, futebol</code></pre>
+      </div>
+    </section>
+  </div>
+  
+  <!-- Rodapé -->
+  <footer>
+    <div class="footer-content">
+      <div class="support">
+        <h3>❤️ Apoie Este Projeto</h3>
+        <p>Se este bot foi útil para você, considere fazer uma contribuição para ajudar no desenvolvimento e manutenção.</p>
+        <p class="donate-email">poupanca@henriquetourinho.com.br</p>
+        <p>Qualquer valor é bem-vindo e muito apreciado!</p>
+      </div>
+      
+      <div class="author">
+        <h3>Carlos Henrique Tourinho Santana</h3>
+        <p>Desenvolvedor do AutoPost-X</p>
+      </div>
+      
+      <div class="social-links">
+        <a href="https://github.com/henriquetourinho" target="_blank" title="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://t.me/seu_usuario" target="_blank" title="Telegram">
+          <i class="fab fa-telegram"></i>
+        </a>
+        <a href="https://instagram.com/seu_usuario" target="_blank" title="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+      
+      <div class="footer-links">
+        <a href="https://github.com/henriquetourinho" target="_blank">GitHub</a>
+        <a href="https://br.linkedin.com/in/carloshenriquetourinhosantana" target="_blank">LinkedIn</a>
+        <a href="https://wiki.debian.org/henriquetourinho" target="_blank">Debian Wiki</a>
+      </div>
+      
+      <div class="made-with-love">
+        <p>Criado com ❤️ por <strong>Carlos Henrique Tourinho Santana</strong></p>
+      </div>
+      
+      <div class="license">
+        <p>Licença GNU GPL v3.0 - Código aberto para uso e modificação</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
